@@ -1,4 +1,5 @@
-import { initMongoDB, disconnectMongoDB} from "./conexion";
+import { disconnectMongoDB, initMongoDB } from "./conexion";
+
 import { UserModel } from "./schema";
 
 const createUser = async(newUser)=>{
