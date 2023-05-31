@@ -1,4 +1,4 @@
-import { ProductModel } from "../models/products.model.js";
+/*import { ProductModel } from "../models/products.model.js";
 
 export default class ProductsManager{
     async getAllProducts() {
@@ -45,4 +45,4 @@ export default class ProductsManager{
             console.log(error);
             }
         }
-}
+}*/

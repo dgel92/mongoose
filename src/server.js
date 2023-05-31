@@ -1,4 +1,4 @@
-import "./db/db.js";
+import "./db/database.js";
 
 import {errorHanbler} from "./middlewares/errorHandlers.js";
 import express from 'express';
