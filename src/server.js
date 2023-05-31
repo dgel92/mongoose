@@ -2,6 +2,7 @@ import "./db/db.js";
 
 import {errorHanbler} from "./middlewares/errorHandlers.js";
 import express from 'express';
+import morgan from "morgan";
 import productsRouter from "./routes/products.router.js";
 
 const app = express();
@@ -9,9 +10,12 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(errorHanbler);
+app.use(morgan)(`dev`)
 
 app.use('/products', productsRouter)
 
-app.listen(8080,()=>{
-console.log('🚀servidor escuchando puerto 8080');
+const PORT = 8080;
+
+app.listen(PORT,()=>{
+console.log(`🚀servidor escuchando puerto ${PORT}`);
 });

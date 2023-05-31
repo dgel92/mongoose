@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+/*import mongoose from "mongoose";
 
 const productsCollection = "products";
 const productsSchema = new mongoose.Schema({
@@ -13,3 +13,4 @@ export const ProductModel = mongoose.model(
     productsCollection,
     productsSchema
 );
+*/
