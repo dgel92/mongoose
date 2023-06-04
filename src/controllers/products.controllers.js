@@ -4,7 +4,7 @@ import {
     getAllService,
     getByIdService,
     updateService
-} from './../services/services.js';
+} from '../services/products.services.js';
 
 export const getAllController = async (req, res, next) => {
     try {
