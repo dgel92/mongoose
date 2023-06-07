@@ -14,7 +14,7 @@ async getUserByName(name){
 async getUserById(id){
     try {
         const response= await UserModel.findById(id).explain();
-        return response.executionStats;
+        return response.populate("pets");
     } catch (error) {
         console.log(error); 
     }
