@@ -56,4 +56,13 @@ async updateUser(id, obj){
         console.log(error);
     }
 }
+
+async deleteUser(id) {
+    try {
+        const response = await UserModel.findByIdAndDelete(id);
+        return response;
+    } catch (error) {
+    console.log(error);
+    }
+}
 }

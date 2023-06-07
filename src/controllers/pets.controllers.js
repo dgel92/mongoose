@@ -1,11 +1,12 @@
-import * as service from "../services/"
+import * as service from "../services/pets.services.js"
 
 export const addPetToUser = async (req, res, next) =>{
     try {
         const {idUser} = req.params;
         const {idPet} = req.params;
         const newPet = await service.addPetToUser(idUser, idPet);
-        res.Json(newPet);
+        if(!newPet) throw new Error ("failed")
+        else res.Json(newPet);
     } catch (error) {
         next(error)
     }
