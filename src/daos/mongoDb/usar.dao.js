@@ -78,4 +78,19 @@ async aggregation1(gender){
         console.log(error);
     }
 }
+
+async updateManyUsers(){
+    try {
+        const user = await UserModel.find({})
+        getAllUsers.forEach((user)=>{
+            user.age = getRandomNumber()
+            user.date = getRandomDate()
+            user.save()
+        })
+        return {message:"updated ok"}
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 }

@@ -107,6 +107,12 @@ export const aggregation1 = async(req, res, next)=>{
     }
 }
 
-
-
+export const updateManyUsers = async(req, res, next) =>{
+    try {
+        const response = await service.updateManyUsers();
+        res.Json(response)
+    } catch (error) {
+        next(error);
+    }
+}
 
