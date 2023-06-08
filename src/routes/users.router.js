@@ -11,6 +11,7 @@ router.get('/', controller.getByNameCtr);
 
 router.get('/:id', controller.getByIdCtr);
 
-router.get('/email/:email', controller.getByEmailCtr);
+router.get('/email/:email', controller.getByemailCtr);
 
+router.get("/aggregation1", controller.aggregation1);
 export default router;

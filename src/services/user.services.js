@@ -103,3 +103,12 @@ export const deleteUser = async (id) => {
         console.log(error);
     }
 };
+
+export const aggregation1 = async(gender)=>{
+    try {
+        const aggregation = await userDao.aggregate1()
+        return aggregation;
+    } catch (error) {
+        console.log(error);
+    }
+}

@@ -97,6 +97,15 @@ export const deleteCtr = async(req, res, next)=>{
     }
 }
 
+export const aggregation1 = async(req, res, next)=>{
+    try {
+        const {gender} = req.query
+        const response = await service.aggregation1(gender);
+        res.Json(response);
+    } catch (error) {
+        next(error)        
+    }
+}
 
 
 

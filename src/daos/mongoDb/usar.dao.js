@@ -65,4 +65,17 @@ async deleteUser(id) {
     console.log(error);
     }
 }
+
+async aggregation1(gender){
+    try {
+        const res = await UserModel.aggregate([
+            {
+                $match: {gender: `${gender}`}
+            }
+        ])
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+}
 }
