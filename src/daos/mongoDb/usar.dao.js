@@ -30,9 +30,9 @@ async getUserByEmail(email){
     }
 }
 
-async getAllUser(){
+async getAllUser(page=1, limit= 10){
     try {
-        const response = await UserModel.find({});
+        const response = await UserModel.paginate({}, {page, limit});
         return response;
     } catch (error) {
         console.log(error);
@@ -70,7 +70,16 @@ async aggregation1(gender){
     try {
         const res = await UserModel.aggregate([
             {
-                $match: {gender: `${gender}`}
+                $match: {
+                    gender: `${gender}`,
+                    age: {$gte: 18}
+                }
+            },
+            {
+                $group: {
+                    _id: "$gender",
+                    average_age: {$avg: "$age"} 
+                }
             }
         ])
         return res;

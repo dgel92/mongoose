@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const UserSchema = new mongoose.Schema({
     first_name:{
@@ -19,8 +20,20 @@ const UserSchema = new mongoose.Schema({
     gender:{
         type: String,
         required: true
-        }
+        },
+        pets: [
+            {
+                type: mongoose.Schema.Types.ObjectId, 
+                ref:  "pets",
+                default: []
+            }
+        ]
     }
 )
 
+UserSchema.pre("find", function(){
+    this.populate("pets")
+})
+
+UserSchema.plugin(mongoosePaginate);
 export const UserModel = mongoose.model('users', UserSchema)

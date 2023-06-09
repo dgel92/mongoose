@@ -4,7 +4,7 @@ export const createFileCtr = async (req, res, next) =>{
     try {
         const newUsers = await service.createFileUser();
         if(!newUsers) throw new Error("validacion erronea");
-        else res.Json(newUsers);
+        else res.json(newUsers);
     } catch (error) {
         next(error);
     }
@@ -21,33 +21,47 @@ export const getByIdCtr = async (req, res, next) =>{
     }
 }
 
-export const getByNameCtr = async (req, res, next) =>{
+export const getByNameCtr = async (req, res, next) => {
     try {
-        const {name} = req.query;
-        const item = await service.getByNameCtr(name);
-        if(!item) throw new Error("usuario no encontrado");
-        res.json(item)
-    } catch (error) {
+        const { name } = req.query;
+        const item = await service.getByNameUser(name);
+        if (!item) throw new Error("User not found!");
+    
+        res.json(item);
+        } catch (error) {
         next(error);
-    }
-}
+        }
+    };
+    
+    export const getByEmailCtr = async (req, res, next) => {
+        try {
+        const { email } = req.params;
+        const item = await service.getByEmailUser(email);
+        if (!item) throw new Error("User not found!");
+    
+        res.json(item);
+        } catch (error) {
+        next(error);
+        }
+    };
 
-export const getByemailCtr = async (req, res, next)=>{
-    try {
-        const {email} = req.params;
-        item = await service.getByemailUser(email);
-        if(!item) throw new error("user not found")
-        res.Json(item)
-    } catch (error) {
-        next(error)
-    }
-}
+
 export const getAllCtr = async(req, res, next)=>{
     try {
         const items = await service.getAllUsers();
         res.Json(items);
     } catch (error) {
         next(error)        
+    }
+}
+
+export const getAllusers = async(req, res, next)=>{
+    try {
+        const { page, limit}= req.query;
+        const response = await service.getAllUsers(page, limit);
+        res.json(response);
+    } catch (error) {
+        next(error)       
     }
 }
 
@@ -110,7 +124,7 @@ export const aggregation1 = async(req, res, next)=>{
 export const updateManyUsers = async(req, res, next) =>{
     try {
         const response = await service.updateManyUsers();
-        res.Json(response)
+        res.json(response)
     } catch (error) {
         next(error);
     }

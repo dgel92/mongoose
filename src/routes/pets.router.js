@@ -8,4 +8,4 @@ router.post('/', controller.createPet);
 router.post('/add/:idUser/:idPet', controller.addPetToUser);
 router.get('/:id', controller.getByIdPet);
 
-export default router;
+export default router; 

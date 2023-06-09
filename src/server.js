@@ -16,7 +16,6 @@ app.use('/products', productsRouter)
 app.use('/users', usersRouter)
 app.use('/pets', petsRouter)
 
-app.use("/", usersRouter);
 
 const PORT = 8080;
 

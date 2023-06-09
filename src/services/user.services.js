@@ -61,9 +61,9 @@ export const getUserByName= async(name)=>{
     }
 }
 
-export const getAllUsers = async () => {
+export const getAllUsers = async (page, limit) => {
     try {
-        const item = await userDao.getAllUsers();
+        const item = await userDao.getAllUsers(page, limit);
         if(!item) throw new Error("user not found");
         else return item;        
     } catch (error) {
@@ -106,8 +106,17 @@ export const deleteUser = async (id) => {
 
 export const aggregation1 = async(gender)=>{
     try {
-        const aggregation = await userDao.aggregate1()
+        const aggregation = await userDao.aggregation1()
         return aggregation;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateManyUsers = async() =>{
+    try {
+        const response = await userDao.updateManyUsers();
+        return response
     } catch (error) {
         console.log(error);
     }
