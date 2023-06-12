@@ -1,29 +1,91 @@
 import {
-    createService,
-    deleteService,
-    getAllService,
-    getByIdService,
-    updateService
-} from '../services/products.services.js';
+        addProductService,
+        deleteProductService,
+        getProductByIdService,
+        getProductsService,
+        updateProductService
+} 
+        from "../services/products.services.js";
 
-export const getAllController = async (req, res, next) => {
+export const getProductsController = async (req, res, next) => {
     try {
-        const docs = await getAllService();
-        res.json(docs);
+        const { page, limit } = req.query;
+        const products = await getProductsService(page, limit);
+        let statusRes;
+        products ? statusRes = 200 : statusRes = 404;
+        res.json({
+            statusRes,
+            payload: products.docs,
+            info: {
+                totalPages: products.totalPages,
+                prevPage: products.hasPrevPage ? products.prevPage : false,
+                nextPage: products.hasNextPage ? products.nextPage : false,
+                page: products.page,
+                hasPrevPage: products.hasPrevPage,
+                hasNextPage: products.hasNextPage,
+                prevLink: products.hasPrevPage ? `http://localhost:8080/products?page=${products.prevPage}` : false,
+                nextLink: products.hasNextPage ? `http://localhost:8080/products?page=${products.nextPage}` : false
+            }
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+export const getProductByIdController = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const product = await getProductByIdService(id);
+        if(product){
+            res.status(200).json(product);
+        } else{
+            res.status(400).json({message: "producto no encontrado"});
+        }
+        res.json(doc);
+        } catch (error) {
+        next(error);
+    }
+}
+
+export const addProductController = async(req, res, next)=>{
+    try{
+        const product = req.body;
+        const newProduct = await addProductService(product);
+        res.status(201).json({ message: 'Product added successfully', product: newProduct });
     } catch (error) {
         next(error);
     }
 }
 
-export const getByIdController = async (req, res, next) => {
+export const updateProductController = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const doc = await getByIdService(id);
-        res.json(doc);
+        const product = req.body;
+        const updateProduct = await updateProductService(id, product);
+        if(updateProduct){
+            res.status(200).json({message: "producto actualizado", product: updateProduct});
+        } else{
+            res.status(400).json({message: "producto no encontrado"});
+        }
     } catch (error) {
-    next(error);
+        next(error);
     }
-};
+}
+
+export const deleteProductController = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const deletedProduct=await deleteProductService(id);
+        if (deletedProduct) {
+            res.status(200).json({ message: 'producto borrado', product: deletedProduct });
+        } else {
+            res.status(404).json({ message: 'Product no encontrado' });
+        }
+    } catch (error) {
+        next(error);
+    }
+}
+
+/*
 export const createController = async (req, res, next) => {
     try {
         const { name, description, price, stock } = req.body
@@ -39,28 +101,12 @@ export const createController = async (req, res, next) => {
         }
     };
 
-export const updateController = async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const { name, description, price, stock } = req.body
-        await getByIdService(id);
-        const docUpdate = await updateService(
-            id,
-            { name, description, price, stock }
-        )
-        res.json(docUpdate);
-    } catch (error) {
-        next(error);
+    export const getAllController = async (req, res, next) => {
+        try {
+            const docs = await getAllService();
+            res.json(docs);
+        } catch (error) {
+            next(error);
+        }
     }
-}
-
-export const deleteController = async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        await deleteService(id)
-        res.send('product deleted!')
-        
-    } catch (error) {
-        next(error);
-    }
-}
+*/

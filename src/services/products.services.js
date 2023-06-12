@@ -2,6 +2,47 @@ import ProductsDaoMongoDB from "../daos/mongoDb/products.dao.js";
 
 const prodDao = new ProductsDaoMongoDB();
 
+export const getProductService = async (page, limit)=>{
+    try {
+        return await getProducts(page, limit)
+    } catch (error) {
+        
+    }
+}
+
+export const getProductByIdService = async (id) => {
+    try {
+        return await getProductById()
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const addProductService = async (product) => {
+    try {
+        return await addProduct(product);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateProductService  = async (id, product) => {
+    try {
+        return await updateProduct(id, product)
+    } catch (error) {
+    console.log(error);
+    }
+};
+
+export const deleteProductService = async (id) => {
+    try {
+        return await deleteProduct(id)
+    } catch (error) {
+    console.log(error);
+    }
+};
+
+/*
 export const getAllService = async () => {
     try {
     const docs = await prodDao.getAllProducts();
@@ -11,15 +52,6 @@ export const getAllService = async () => {
     }
 };
 
-export const getByIdService = async (id) => {
-    try {
-        const doc = await prodDao.getProductById(id);
-        if(!doc) throw new Error('Product not found')
-        else return doc;
-        } catch (error) {
-        console.log(error);
-        }
-    };
     
     export const createService = async (obj) => {
         try {
@@ -30,26 +62,4 @@ export const getByIdService = async (id) => {
         console.log(error);
         }
     };
-    
-    export const updateService = async (id, obj) => {
-        try {
-        const doc = await prodDao.getProductById(id);
-        if(!doc){
-            throw new Error('Product not found')
-        } else {
-            const prodUpd = await prodDao.updateProduct(id, obj)
-            return prodUpd;
-        }
-        } catch (error) {
-        console.log(error);
-        }
-    };
-    
-    export const deleteService = async (id) => {
-        try {
-        const prodDel = await prodDao.deleteProduct(id);
-        return prodDel;
-        } catch (error) {
-        console.log(error);
-        }
-    };
+*/

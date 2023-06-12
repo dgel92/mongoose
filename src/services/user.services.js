@@ -7,16 +7,17 @@ const userDao = new UserDaoMongoDB();
 
 const userFile = JSON.parse(fs.readFileSync(__dirname + "/data/Users.json", "utf-8"));
 
-export const createFileUser = async (obj) =>{
+export const createFileUser = async () => {
     try {
-        const newUser = await userDao.createUser(userFile);
-        console.log("usuario guardado");
-        if(!newUser) throw new Error("validacion erronea");
-        else return {message: "usuarios guardados"};
-    } catch (error) {
-        console.log(error);      
-    }
-}
+        const newUser = await userDao.createUser(usersFile);
+        console.log('¡Users saved!');
+        if (!newUser) throw new Error("Validation Error!");
+        else return { message: 'Users saved!' };
+        } catch (error) {
+        console.log(error);
+        }
+    };
+
 
 export const getByNameUser = async (name) =>{
     try {
